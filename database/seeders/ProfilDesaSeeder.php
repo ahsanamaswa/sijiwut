@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\{ProfilDesa, Misi, Dusun, FasePemerintahan, KepalaDesa, TokohDesa, Geografis};
+use App\Models\{ProfilDesa, Misi, Dusun, FasePemerintahan, KepalaDesa, TokohDesa};
 use Illuminate\Database\Seeder;
 
 class ProfilDesaSeeder extends Seeder
@@ -72,19 +72,5 @@ class ProfilDesaSeeder extends Seeder
             TokohDesa::create(['nama' => $t[0], 'alamat' => $t[1], 'tahun' => $t[2], 'unsur' => $t[3], 'urutan' => $i]);
         }
 
-        Geografis::updateOrCreate(['id' => 1], [
-            'luas_total' => 433.9, 'luas_sawah' => 196.7, 'luas_bukan_sawah' => 165.6, 'luas_non_pertanian' => 71.6,
-            'koordinat' => "7°21'–7°31' LS, 111°10'–111°40' BT",
-            'ketinggian' => '± 183 mdpl',
-            'topografi' => 'Dataran sedang',
-            'curah_hujan' => '811,41 mm/tahun',
-            'jarak_kecamatan' => '1,7 km (± 5 menit)',
-            'jarak_kabupaten' => '6 km (± 15 menit)',
-            'batas_utara' => 'Kelurahan Nglegok',
-            'batas_selatan' => 'Kel. Sentul, Kec. Kepanjen Kidul, Kota Blitar',
-            'batas_barat' => 'Desa Krenceng & Bangsri',
-            'batas_timur' => 'Kel. Tawangsari & Desa Pojok, Kec. Garum',
-            'catatan_pertanian' => 'Sebagian besar sawah di Desa Jiwut menggunakan irigasi teknis, non-teknis, maupun sederhana...',
-        ]);
     }
 }
