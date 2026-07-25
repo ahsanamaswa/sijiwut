@@ -1,9 +1,62 @@
-@import 'tailwindcss';
-
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Raleway:wght@500;600;700;800&display=swap');
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-forest: #2F4A1E;
+    --color-gold:   #F4C430;
+    --color-orange: #E07B39;
+    --color-brown:  #2B1B12;
+    --color-cream:  #FCF6BA;
+    --color-cincau: #BAF180;
+
+    --font-sans:    'Inter', system-ui, sans-serif;
+    --font-heading: 'Raleway', sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-brown);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+}
+
+/* ================= Gradient overlay animasi (header peta desa) ================= */
+@layer utilities {
+    .gradient-animated {
+        overflow: hidden;
+    }
+
+    .gradient-animated::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background-image: linear-gradient(100deg,
+            rgba(47, 74, 30, 0.95) 0%,
+            rgba(47, 74, 30, 0.7) 10%,
+            rgba(244, 196, 48, 0.35) 20%,
+            rgba(47, 74, 30, 0.7) 30%,
+            rgba(47, 74, 30, 0.95) 40%,
+            rgba(47, 74, 30, 0.95) 50%,
+            rgba(47, 74, 30, 0.7) 60%,
+            rgba(244, 196, 48, 0.35) 70%,
+            rgba(47, 74, 30, 0.7) 80%,
+            rgba(47, 74, 30, 0.95) 90%,
+            rgba(47, 74, 30, 0.95) 100%);
+        animation: gradientSlide 7s linear infinite;
+        will-change: transform;
+    }
+}
+
+@keyframes gradientSlide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
