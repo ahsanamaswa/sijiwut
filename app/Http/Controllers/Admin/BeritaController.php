@@ -214,10 +214,10 @@ class BeritaController extends Controller
             if (preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', $html, $m)) {
                 return $m[1];
             }
-        } catch (\Throwable $e) {
-            Log::warning('Gagal mengambil thumbnail berita eksternal: '.$e->getMessage());
-        }
+    } catch (\Throwable $e) {
+                Log::warning('Gagal mengambil thumbnail berita eksternal: '.$e->getMessage());
+            }
 
-        return null;
+            return null;
+        }
     }
-}
