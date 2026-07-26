@@ -9,7 +9,7 @@
 
     {{-- ================= HEADER GALERI ================= --}}
     <section class="relative w-full h-[300px] md:h-[380px] overflow-hidden">
-        <img src="{{ asset('images/galeri.png') }}" alt="Gapura Desa Jiwut"
+        <img src="{{ asset('images/galeri.jpg') }}" alt="Gapura Desa Jiwut"
             class="absolute inset-0 w-full h-full object-cover">
 
         {{-- Overlay gradient animasi --}}
