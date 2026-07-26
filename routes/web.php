@@ -30,7 +30,9 @@ Route::get('/dashboard', function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
     // Kelola Berita
-    Route::resource('berita', AdminBeritaController::class)->except('show');
+    Route::resource('berita', AdminBeritaController::class)
+        ->except('show')
+        ->parameters(['berita' => 'berita']);
 
     Route::patch('berita/{berita}/unggulan', [AdminBeritaController::class, 'setUnggulan'])
         ->name('berita.set-unggulan');
