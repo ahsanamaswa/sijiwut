@@ -78,15 +78,15 @@
                 <div class="flex items-center gap-4 bg-white rounded-xl p-4 border border-brown/10">
                     <div class="w-10 h-10 rounded-full bg-[#DF8505] flex-shrink-0"></div>
                     <div>
-                        <p class="font-heading font-semibold text-brown">Dusun Darungan</p>
-                        <p class="text-xs text-brown/60">Wilayah paling utara Desa Jiwut</p>
+                        <p class="font-heading font-semibold text-brown">Dusun Ngrobyong</p>
+                        <p class="text-xs text-brown/60">Wilayah timur laut, berbatasan dengan Kelurahan Nglegok</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4 bg-white rounded-xl p-4 border border-brown/10">
                     <div class="w-10 h-10 rounded-full bg-[#5D2A82] flex-shrink-0"></div>
                     <div>
-                        <p class="font-heading font-semibold text-brown">Dusun Ngrobyong</p>
-                        <p class="text-xs text-brown/60">Wilayah timur laut, berbatasan dengan Kelurahan Nglegok</p>
+                        <p class="font-heading font-semibold text-brown">Dusun Darungan</p>
+                        <p class="text-xs text-brown/60">Wilayah paling utara Desa Jiwut</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4 bg-white rounded-xl p-4 border border-brown/10">
