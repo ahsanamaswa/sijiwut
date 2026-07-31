@@ -8,7 +8,8 @@
     "require": {
         "php": "^8.3",
         "laravel/framework": "^13.8",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "spatie/laravel-sitemap": "^8.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -80,6 +81,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "ignore": ["PKSA-bbs6-q5q9-f3t4", "PKSA-qxvb-2bpp-dnk6", "PKSA-fy2t-3c5f-827y", "PKSA-pwsk-hy21-4gby"]
         }
     },
     "minimum-stability": "stable",
