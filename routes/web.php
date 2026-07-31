@@ -63,6 +63,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::patch('berita/{berita}/unggulan', [AdminBeritaController::class, 'setUnggulan'])
         ->name('berita.set-unggulan');
 
+    Route::post('berita/upload-gambar', [BeritaController::class, 'uploadGambarKonten'])
+    ->name('admin.berita.upload-gambar');
+
     // Kelola Profil Desa
     Route::get('profil-desa', [ProfilDesaController::class, 'edit'])->name('profil-desa.edit');
     Route::put('profil-desa', [ProfilDesaController::class, 'update'])->name('profil-desa.update');

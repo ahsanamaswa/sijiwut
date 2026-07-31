@@ -72,11 +72,21 @@
     </div>
 
     <div class="md:col-span-2">
-        <label class="block text-sm font-medium text-brown mb-1.5">Isi Berita</label>
-        <textarea name="konten" rows="8"
-                  class="w-full rounded-xl border border-brown/20 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-forest/40"
-                  placeholder="Wajib diisi kalau berita BUKAN dari sumber luar">{{ $old('konten') }}</textarea>
-    </div>
+    <label class="block text-sm font-medium text-brown mb-1.5">Isi Berita</label>
+
+    {{-- input tersembunyi yang benar-benar dikirim ke server --}}
+    <input id="konten" type="hidden" name="konten" value="{{ $old('konten') }}">
+
+    {{-- editor visualnya --}}
+    <trix-editor input="konten"
+                 class="trix-content w-full rounded-xl border border-brown/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest/40"
+                 placeholder="Wajib diisi kalau berita BUKAN dari sumber luar"></trix-editor>
+
+    <p class="text-xs text-brown/60 mt-2">
+        Gunakan tombol gambar di toolbar untuk menyisipkan foto di posisi mana pun dalam teks —
+        di atas, di tengah paragraf, maupun di akhir.
+    </p>
+</div>
 
     <div class="md:col-span-2">
         <label class="block text-sm font-medium text-brown mb-1.5">Gambar</label>
@@ -92,3 +102,32 @@
     </div>
 
 </div>
+
+@push('scripts')
+<script>
+document.addEventListener('trix-attachment-add', function (event) {
+    const attachment = event.attachment;
+    if (attachment.file) {
+        const formData = new FormData();
+        formData.append('image', attachment.file);
+        formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+
+        fetch('{{ route("admin.berita.upload-gambar") }}', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(res => res.json())
+        .then(data => {
+            attachment.setAttributes({
+                url: data.url,
+                href: data.url,
+            });
+        })
+        .catch(() => {
+            attachment.remove();
+            alert('Gagal mengunggah gambar. Coba lagi.');
+        });
+    }
+});
+</script>
+@endpush

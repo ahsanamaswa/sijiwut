@@ -22,6 +22,17 @@ h1, h2, h3, h4 {
     font-family: var(--font-heading);
 }
 
+/* === Styling untuk konten berita dari Trix editor === */
+.trix-content img {
+    border-radius: 0.75rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+}
+
+trix-editor img {
+    max-width: 300px;
+}
+
 /* ================= Gradient overlay animasi (header peta desa) ================= */
 @layer utilities {
     .gradient-animated {

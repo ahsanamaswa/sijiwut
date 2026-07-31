@@ -7,6 +7,7 @@ use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BeritaController extends Controller
@@ -109,6 +110,24 @@ class BeritaController extends Controller
         return redirect()
             ->route('admin.berita.index')
             ->with('status', 'Berita ini dijadikan berita unggulan, menggantikan yang sebelumnya.');
+    }
+
+    /**
+     * Endpoint khusus dipanggil oleh editor Trix (event trix-attachment-add)
+     * saat admin menyisipkan gambar langsung di dalam isi berita.
+     * Beda dengan field 'gambar' utama (yang tetap jadi thumbnail kartu berita).
+     */
+    public function uploadGambarKonten(Request $request)
+    {
+        $request->validate([
+            'image' => ['required', 'image', 'max:5120'],
+        ]);
+
+        $path = $request->file('image')->store('berita-konten', 'public');
+
+        return response()->json([
+            'url' => Storage::url($path),
+        ]);
     }
 
     protected function validateData(Request $request, ?int $ignoreId = null): array
@@ -214,10 +233,10 @@ class BeritaController extends Controller
             if (preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', $html, $m)) {
                 return $m[1];
             }
-    } catch (\Throwable $e) {
-                Log::warning('Gagal mengambil thumbnail berita eksternal: '.$e->getMessage());
-            }
-
-            return null;
+        } catch (\Throwable $e) {
+            Log::warning('Gagal mengambil thumbnail berita eksternal: '.$e->getMessage());
         }
+
+        return null;
     }
+}

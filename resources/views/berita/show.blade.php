@@ -62,9 +62,9 @@
                 </figcaption>
             </figure>
 
-            <div class="prose prose-sm md:prose-base max-w-none text-brown/80 leading-relaxed">
+            <div class="trix-content prose prose-sm md:prose-base max-w-none text-brown/80 leading-relaxed">
                 @if ($berita->konten)
-                    {!! nl2br(e($berita->konten)) !!}
+                    {!! $berita->konten !!}
                 @else
                     <p>{{ $berita->ringkasan }}</p>
                 @endif
