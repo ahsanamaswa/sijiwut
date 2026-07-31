@@ -22,19 +22,20 @@ Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
-// Sitemap untuk SEO
 Route::get('/sitemap.xml', function () {
+    $baseUrl = rtrim(env('APP_URL', config('app.url')), '/');
+    
     $urls = collect([
-        ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'weekly'],
-        ['loc' => route('tentang-desa'), 'priority' => '0.8', 'changefreq' => 'monthly'],
-        ['loc' => route('peta'), 'priority' => '0.7', 'changefreq' => 'monthly'],
-        ['loc' => route('galeri.index'), 'priority' => '0.7', 'changefreq' => 'weekly'],
-        ['loc' => route('berita.index'), 'priority' => '0.8', 'changefreq' => 'daily'],
+        ['loc' => $baseUrl, 'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => $baseUrl . '/tentang-desa', 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => $baseUrl . '/peta', 'priority' => '0.7', 'changefreq' => 'monthly'],
+        ['loc' => $baseUrl . '/galeri', 'priority' => '0.7', 'changefreq' => 'weekly'],
+        ['loc' => $baseUrl . '/berita', 'priority' => '0.8', 'changefreq' => 'daily'],
     ]);
 
-    Berita::all()->each(function ($berita) use ($urls) {
+    Berita::all()->each(function ($berita) use ($urls, $baseUrl) {
         $urls->push([
-            'loc' => route('berita.show', $berita->slug),
+            'loc' => $baseUrl . '/berita/' . $berita->slug,
             'priority' => '0.6',
             'changefreq' => 'monthly',
             'lastmod' => $berita->updated_at->toAtomString(),
