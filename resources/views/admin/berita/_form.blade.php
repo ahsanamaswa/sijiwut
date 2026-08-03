@@ -83,8 +83,8 @@
                  placeholder="Wajib diisi kalau berita BUKAN dari sumber luar"></trix-editor>
 
     <p class="text-xs text-brown/60 mt-2">
-        Gunakan tombol gambar di toolbar untuk menyisipkan foto di posisi mana pun dalam teks —
-        di atas, di tengah paragraf, maupun di akhir.
+        Gunakan tombol gambar di toolbar untuk menyisipkan foto di posisi mana pun dalam teks
+(di atas, di tengah paragraf, maupun di akhir.)
     </p>
 </div>
 

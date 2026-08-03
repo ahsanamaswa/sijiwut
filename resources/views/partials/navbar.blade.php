@@ -1,6 +1,6 @@
 @php
     $menus = [
-        'home'            => ['route' => 'home',                 'label' => 'Home'],
+        'home'            => ['route' => 'home',                 'label' => 'Beranda'],
         'tentang-desa'    => ['route' => 'tentang-desa',          'label' => 'Tentang Desa'],
         'peta'            => ['route' => 'peta',                  'label' => 'Peta'],
         'galeri'          => ['route' => 'galeri.index',          'label' => 'Galeri Desa'],
