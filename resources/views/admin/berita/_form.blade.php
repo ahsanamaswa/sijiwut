@@ -72,21 +72,30 @@
     </div>
 
     <div class="md:col-span-2">
-    <label class="block text-sm font-medium text-brown mb-1.5">Isi Berita</label>
+        <label class="block text-sm font-medium text-brown mb-1.5">Isi Berita</label>
 
-    {{-- input tersembunyi yang benar-benar dikirim ke server --}}
-    <input id="konten" type="hidden" name="konten" value="{{ $old('konten') }}">
+        {{-- input tersembunyi yang benar-benar dikirim ke server --}}
+        <input id="konten" type="hidden" name="konten" value="{{ $old('konten') }}">
 
-    {{-- editor visualnya --}}
-    <trix-editor input="konten"
-                 class="trix-content w-full rounded-xl border border-brown/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest/40"
-                 placeholder="Wajib diisi kalau berita BUKAN dari sumber luar"></trix-editor>
+        {{-- editor visualnya --}}
+        <trix-editor input="konten"
+                     class="trix-content w-full rounded-xl border border-brown/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest/40"
+                     placeholder="Wajib diisi kalau berita BUKAN dari sumber luar"></trix-editor>
 
-    <p class="text-xs text-brown/60 mt-2">
-        Gunakan tombol gambar di toolbar untuk menyisipkan foto di posisi mana pun dalam teks
-(di atas, di tengah paragraf, maupun di akhir.)
-    </p>
-</div>
+        {{-- Toolbar ukuran gambar --}}
+        <div class="flex items-center gap-2 mt-2 text-xs flex-wrap">
+            <span class="text-brown/60">Klik gambar di atas, lalu atur ukurannya:</span>
+            <button type="button" data-resize="300" class="resize-btn px-3 py-1 rounded-full border border-brown/20 text-brown/70 hover:bg-forest/10 disabled:opacity-30 disabled:cursor-not-allowed" disabled>Kecil</button>
+            <button type="button" data-resize="500" class="resize-btn px-3 py-1 rounded-full border border-brown/20 text-brown/70 hover:bg-forest/10 disabled:opacity-30 disabled:cursor-not-allowed" disabled>Sedang</button>
+            <button type="button" data-resize="700" class="resize-btn px-3 py-1 rounded-full border border-brown/20 text-brown/70 hover:bg-forest/10 disabled:opacity-30 disabled:cursor-not-allowed" disabled>Besar</button>
+            <button type="button" data-resize="full" class="resize-btn px-3 py-1 rounded-full border border-brown/20 text-brown/70 hover:bg-forest/10 disabled:opacity-30 disabled:cursor-not-allowed" disabled>Penuh Lebar</button>
+        </div>
+
+        <p class="text-xs text-brown/60 mt-2">
+            Gunakan tombol gambar di toolbar untuk menyisipkan foto di posisi mana pun dalam teks
+            (di atas, di tengah paragraf, maupun di akhir).
+        </p>
+    </div>
 
     <div class="md:col-span-2">
         <label class="block text-sm font-medium text-brown mb-1.5">Gambar</label>
@@ -128,6 +137,41 @@ document.addEventListener('trix-attachment-add', function (event) {
             alert('Gagal mengunggah gambar. Coba lagi.');
         });
     }
+});
+
+// ===== Fitur atur ukuran gambar di dalam editor =====
+let currentAttachment = null;
+
+document.addEventListener('trix-selection-change', function (event) {
+    const trixEditor = event.target;
+    if (!trixEditor.editor) return;
+
+    const range = trixEditor.editor.getSelectedRange();
+    const piece = trixEditor.editor.getDocument().getPieceAtPosition(range[0]);
+
+    const resizeButtons = document.querySelectorAll('.resize-btn');
+
+    if (piece && piece.attachment && piece.attachment.getAttribute('contentType')?.startsWith('image')) {
+        currentAttachment = piece.attachment;
+        resizeButtons.forEach(btn => btn.disabled = false);
+    } else {
+        currentAttachment = null;
+        resizeButtons.forEach(btn => btn.disabled = true);
+    }
+});
+
+document.querySelectorAll('.resize-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        if (!currentAttachment) return;
+
+        const size = this.dataset.resize;
+
+        if (size === 'full') {
+            currentAttachment.setAttributes({ width: null, height: null });
+        } else {
+            currentAttachment.setAttributes({ width: parseInt(size), height: null });
+        }
+    });
 });
 </script>
 @endpush
