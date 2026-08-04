@@ -21,7 +21,7 @@
         <div>
             <p class="font-heading font-semibold text-gold mb-3">Links</p>
             <ul class="space-y-3 text-sm text-white/80">
-                <li><a href="{{ route('home') }}" class="hover:text-white">Home</a></li>
+                <li><a href="{{ route('home') }}" class="hover:text-white">Beranda</a></li>
                 <li><a href="{{ route('tentang-desa') }}" class="hover:text-white">Tentang Desa</a></li>
                 <li><a href="{{ route('peta') }}" class="hover:text-white">Peta</a></li>
                 <li><a href="{{ route('galeri.index') }}" class="hover:text-white">Galeri Desa</a></li>
