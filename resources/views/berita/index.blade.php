@@ -14,7 +14,7 @@
     <div class="relative z-10 h-full flex flex-col justify-center px-6 md:px-20">
         <div class="max-w-6xl mx-auto w-full">
             <div class="flex items-center gap-2 text-xs text-cream/70 mb-4">
-                <a href="{{ route('home') }}" class="hover:text-cream transition">Home</a>
+                <a href="{{ route('home') }}" class="hover:text-cream transition">Beranda</a>
                 <i class="ti ti-chevron-right text-[10px]"></i>
                 <span class="text-cream">Berita</span>
             </div>
