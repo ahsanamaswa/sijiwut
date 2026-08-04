@@ -120,7 +120,7 @@ class BeritaController extends Controller
     public function uploadGambarKonten(Request $request)
     {
         $request->validate([
-            'image' => ['required', 'image', 'max:5120'],
+            'image' => ['required', 'image', 'max:15360'],
         ]);
 
         $path = $request->file('image')->store('berita-konten', 'public');
@@ -141,7 +141,7 @@ class BeritaController extends Controller
             'ringkasan'      => ['required', 'string', 'max:500'],
             'konten'         => ['required_without:link_eksternal', 'nullable', 'string'],
             'link_eksternal' => ['nullable', 'url', 'max:500'],
-            'gambar'         => ['nullable', 'image', 'max:5120'],
+            'gambar'         => ['nullable', 'image', 'max:15360'],
         ]);
     }
 
